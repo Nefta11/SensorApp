@@ -11,11 +11,9 @@ import android.app.Activity;
 import android.util.Log;
 
 public class MainActivity extends Activity implements SensorEventListener {
-
-    // Etiqueta para mensajes de registro (Log)
     private static final String TAG = "ProximitySensorApp";
 
-    // Gestor del sensor y el sensor de proximidad
+
     private SensorManager sensorManager;
     private Sensor proximitySensor;
 
@@ -24,24 +22,21 @@ public class MainActivity extends Activity implements SensorEventListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Obtener el gestor de sensores del sistema
+
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
-        // Obtener el sensor de proximidad
         proximitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
 
-        // Verificar si el sensor de proximidad está disponible
+
         if (proximitySensor == null) {
             Log.e(TAG, "Proximity sensor not available.");
-            finish(); // Cerrar la aplicación si no hay sensor de proximidad
+            finish();
         }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        // Registrar el listener para el sensor de proximidad cuando la actividad está en primer plano
         sensorManager.registerListener(this, proximitySensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
